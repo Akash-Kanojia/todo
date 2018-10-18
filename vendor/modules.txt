@@ -1,5 +1,9 @@
 # github.com/google/uuid v1.0.0
 github.com/google/uuid
+# github.com/gorilla/context v1.1.1
+github.com/gorilla/context
+# github.com/gorilla/mux v1.6.2
+github.com/gorilla/mux
 # go.uber.org/atomic v1.3.2
 go.uber.org/atomic
 # go.uber.org/dig v1.5.0

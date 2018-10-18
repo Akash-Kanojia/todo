@@ -8,5 +8,6 @@ var Module = fx.Options(
 	fx.Provide(
 		NewRepository,
 		NewService,
+		NewServer,
 	),
 )

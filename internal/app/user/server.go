@@ -14,12 +14,7 @@ func NewServer(service Service) Server {
 	}
 }
 
-// Create a task.
+// Create a user.
 func (s Server) Create(w http.ResponseWriter, r *http.Request) {
-
-}
-
-// Find a task for given id.
-func (s Server) Find(w http.ResponseWriter, r *http.Request) {
 
 }

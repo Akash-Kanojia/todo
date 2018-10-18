@@ -33,3 +33,8 @@ func (s Server) Find(w http.ResponseWriter, r *http.Request) {
 func (s Server) FindAll(w http.ResponseWriter, r *http.Request) {
 
 }
+
+// Delete tasks for given id.
+func (s Server) Delete(w http.ResponseWriter, r *http.Request) {
+
+}

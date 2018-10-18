@@ -5,7 +5,7 @@ import mgo "gopkg.in/mgo.v2"
 // Repository is an interface between persistence layer and user entity.
 type Repository interface {
 	Save(user User) error
-	Find(email string) User
+	Find(email string) (User, error)
 }
 
 type RepositoryImpl struct {
@@ -26,7 +26,7 @@ func (repo *RepositoryImpl) Save(usr User) (err error) {
 }
 
 // Find user by ID.
-func (repo *RepositoryImpl) Find(ID string) (usr User) {
+func (repo *RepositoryImpl) Find(ID string) (usr User, err error) {
 
 	return
 }
