@@ -4,27 +4,29 @@ import mgo "gopkg.in/mgo.v2"
 
 // Repository is an interface between persistence layer and user entity.
 type Repository interface {
-	Create(user User) error
+	Save(user User) error
 	Find(email string) User
 }
 
-type MongoRepository struct {
+type RepositoryImpl struct {
 	DB *mgo.Database
 }
 
-func NewRepository(db *mgo.Database) (impl *MongoRepository) {
-	impl = &MongoRepository{
+func NewRepository(db *mgo.Database) (impl *RepositoryImpl) {
+	impl = &RepositoryImpl{
 		DB: db,
 	}
 	return
 }
 
-func (repo *MongoRepository) Create(usr User) (err error) {
+// Save or update user.
+func (repo *RepositoryImpl) Save(usr User) (err error) {
 
 	return
 }
 
-func (repo *MongoRepository) Find(ID string) (usr User) {
+// Find user by ID.
+func (repo *RepositoryImpl) Find(ID string) (usr User) {
 
 	return
 }

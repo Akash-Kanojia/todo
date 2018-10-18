@@ -1,52 +1,50 @@
 package task
 
 import (
-	"todo/app/api/user"
+	"todo/internal/app/user"
 
 	mgo "gopkg.in/mgo.v2"
 )
 
 // Repository is an interface between persistence layer and task entity.
 type Repository interface {
-	Create(task Task) error
-	Update(task Task) error
-	Find(ID string) Task
-	FindAll(user user.User) []Task
+	Save(task Task) error
+	Find(ID string) (Task, error)
+	FindAll(user user.User) ([]Task, error)
 	Delete(ID string) error
 }
 
-type MongoRepository struct {
+// RepositoryImpl is the implementation of Repository.
+type RepositoryImpl struct {
 	DB *mgo.Database
 }
 
-func NewRepository(db *mgo.Database) (impl *MongoRepository) {
-	impl = &MongoRepository{
+// NewRepository returns an instance of RepositoryImpl.
+func NewRepository(db *mgo.Database) (impl *RepositoryImpl) {
+	impl = &RepositoryImpl{
 		DB: db,
 	}
 	return
 }
 
-func (repo *MongoRepository) Create(task Task) (err error) {
+func (repo *RepositoryImpl) Find(ID string) (task Task, err error) {
 
 	return
 }
 
-func (repo *MongoRepository) Update(task Task) (err error) {
+func (repo *RepositoryImpl) FindAll(usr user.User) (tasks []Task, err error) {
 
 	return
 }
 
-func (repo *MongoRepository) Delete(ID string) (err error) {
+// Save or update a task.
+func (repo *RepositoryImpl) Save(task Task) (err error) {
 
 	return
 }
 
-func (repo *MongoRepository) Find(ID string) (task Task) {
-
-	return
-}
-
-func (repo *MongoRepository) FindAll(usr user.User) (tasks []Task) {
+// Delete a task corresponding to given ID.
+func (repo *RepositoryImpl) Delete(ID string) (err error) {
 
 	return
 }
