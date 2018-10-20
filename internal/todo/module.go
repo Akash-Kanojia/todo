@@ -17,7 +17,7 @@ var Module = fx.Options(
 
 	fx.Invoke(
 		HttpServer,
-		task.Listen,
-		user.Listen,
+		task.ServeRoutes,
+		user.ServeRoutes,
 	),
 )

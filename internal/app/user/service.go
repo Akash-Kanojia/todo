@@ -20,7 +20,8 @@ func NewService(repo Repository) Service {
 }
 
 // Create a user.
-func (s Service) Create(user User) (err error) {
+func (s Service) Create(usr User) (user User, err error) {
+	user = NewUser(usr.Email, usr.Name)
 	err = s.repo.Save(user)
 	return
 }
@@ -31,10 +32,10 @@ func (s Service) Find(email string) (user User, err error) {
 	return
 }
 
-func (s Service) Auth(ctx context.Context) (authentic bool) {
+func (s Service) Auth(ctx context.Context) (user User, authentic bool) {
 	var (
-		ctxUser, usr User
-		err          error
+		ctxUser User
+		err     error
 	)
 
 	if ctxUser, err = FromContext(ctx); err != nil {
@@ -45,8 +46,10 @@ func (s Service) Auth(ctx context.Context) (authentic bool) {
 		return
 	}
 
-	if usr, err = s.repo.Find(ctxUser.Email); err == nil {
-		return usr.APISecret == ctxUser.APISecret
+	if user, err = s.repo.Find(ctxUser.Email); err == nil {
+		authentic = (user.APISecret == ctxUser.APISecret)
+		return
 	}
+
 	return
 }

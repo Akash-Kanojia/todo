@@ -13,12 +13,12 @@ const (
 	taskID = "/list/task/{id}"
 )
 
-func Listen(r *mux.Router, server Server) {
+func ServeRoutes(r *mux.Router, server Server) {
 	r.HandleFunc(task, func(w http.ResponseWriter, r *http.Request) {
 		server.Create(w, r)
 	}).Methods("POST")
 
-	r.HandleFunc(taskID, func(w http.ResponseWriter, r *http.Request) {
+	r.HandleFunc(task, func(w http.ResponseWriter, r *http.Request) {
 		server.Update(w, r)
 	}).Methods("PUT")
 

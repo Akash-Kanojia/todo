@@ -1,6 +1,11 @@
 package user
 
-import mgo "gopkg.in/mgo.v2"
+import (
+	mgo "gopkg.in/mgo.v2"
+	"gopkg.in/mgo.v2/bson"
+)
+
+const collectionName = "user"
 
 // Repository is an interface between persistence layer and user entity.
 type Repository interface {
@@ -21,12 +26,12 @@ func NewRepository(db *mgo.Database) (impl Repository) {
 
 // Save or update user.
 func (repo *RepositoryImpl) Save(usr User) (err error) {
-
+	err = repo.DB.C(collectionName).Insert(usr)
 	return
 }
 
 // Find user by ID.
-func (repo *RepositoryImpl) Find(ID string) (usr User, err error) {
-
+func (repo *RepositoryImpl) Find(email string) (usr User, err error) {
+	err = repo.DB.C(collectionName).Find(bson.M{"email": email}).One(&usr)
 	return
 }

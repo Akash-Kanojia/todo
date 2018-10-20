@@ -2,6 +2,8 @@ package user
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -36,5 +38,17 @@ func MakeContext(r *http.Request) (ctx context.Context) {
 
 // Create a user.
 func (s Server) Create(w http.ResponseWriter, r *http.Request) {
-
+	var (
+		user User
+		err  error
+	)
+	if err = json.NewDecoder(r.Body).Decode(&user); err == nil {
+		if user, err = s.service.Create(user); err == nil {
+			json.NewEncoder(w).Encode(user)
+		} else {
+			w.Write([]byte(fmt.Sprintf("error in creating user, %v", err)))
+		}
+	} else {
+		w.Write([]byte("bad json: user can't be decoded."))
+	}
 }
