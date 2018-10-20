@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
+	"todo/internal/app/user"
 )
 
 type Server struct {
@@ -23,8 +24,10 @@ func (s Server) Create(w http.ResponseWriter, r *http.Request) {
 		err  error
 	)
 
+	ctx := user.MakeContext(r)
+
 	if err = json.NewDecoder(r.Body).Decode(&task); err == nil {
-		if task, err = s.service.Create(task); err == nil {
+		if task, err = s.service.Create(ctx, task); err == nil {
 			fmt.Println("Writing response")
 			w.Header().Set("Content-Type", "application/json")
 			json.NewEncoder(w).Encode(task)

@@ -12,7 +12,7 @@ type RepositoryImpl struct {
 	DB *mgo.Database
 }
 
-func NewRepository(db *mgo.Database) (impl *RepositoryImpl) {
+func NewRepository(db *mgo.Database) (impl Repository) {
 	impl = &RepositoryImpl{
 		DB: db,
 	}

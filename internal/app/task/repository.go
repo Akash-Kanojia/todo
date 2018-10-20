@@ -20,7 +20,7 @@ type RepositoryImpl struct {
 }
 
 // NewRepository returns an instance of RepositoryImpl.
-func NewRepository(db *mgo.Database) (impl *RepositoryImpl) {
+func NewRepository(db *mgo.Database) (impl Repository) {
 	impl = &RepositoryImpl{
 		DB: db,
 	}
