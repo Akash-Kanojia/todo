@@ -31,11 +31,13 @@ func NewRepository(db *mgo.Database) (impl Repository) {
 	return
 }
 
+// Find retrieves task for given id from database
 func (repo *RepositoryImpl) Find(ID string) (task Task, err error) {
 	err = repo.DB.C(collectionName).Find(bson.M{"id": ID}).One(&task)
 	return
 }
 
+// FindAll retrieves all task for given user email from database
 func (repo *RepositoryImpl) FindAll(usr user.User) (tasks []Task, err error) {
 	err = repo.DB.C(collectionName).Find(bson.M{"useremail": usr.Email}).All(&tasks)
 	return
