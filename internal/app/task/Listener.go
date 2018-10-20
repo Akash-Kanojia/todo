@@ -8,9 +8,9 @@ import (
 
 // Routes for task.
 const (
-	list   = "list"
-	task   = "list/task"
-	taskID = "list/task/{id}"
+	list   = "/list"
+	task   = "/list/task"
+	taskID = "/list/task/{id}"
 )
 
 func Listen(r *mux.Router, server Server) {

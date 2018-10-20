@@ -8,7 +8,7 @@ import (
 
 // Routes for task.
 const (
-	signup = "user/signup"
+	signup = "/user/signup"
 )
 
 func Listen(r *mux.Router, server Server) {

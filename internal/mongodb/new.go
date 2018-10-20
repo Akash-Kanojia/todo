@@ -18,7 +18,10 @@ func New() *mgo.Database {
 	if session, err = mgo.Dial(
 		config.GetDef("MONGO_DB_URL", "http://localhost:7070"),
 	); err != nil {
-		panic(fmt.Errorf("Error in establishing database connection %+v", err))
+		panic(fmt.Errorf("Error in establishing database connection on %v , error : %+v",
+			config.GetDef("MONGO_DB_URL", "http://localhost:7070"),
+			err,
+		))
 	}
 
 	db = session.DB(config.GetDef("DB_NAME", "to-do"))

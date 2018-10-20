@@ -39,7 +39,7 @@ func (repo *RepositoryImpl) FindAll(usr user.User) (tasks []Task, err error) {
 
 // Save or update a task.
 func (repo *RepositoryImpl) Save(task Task) (err error) {
-
+	err = repo.DB.C("task").Insert(task)
 	return
 }
 

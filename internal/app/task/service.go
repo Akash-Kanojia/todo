@@ -16,8 +16,10 @@ func NewService(repo *RepositoryImpl) Service {
 }
 
 // Create a task.
-func (s Service) Create(task Task) (err error) {
-	err = s.repo.Save(task)
+func (s Service) Create(raw Task) (task Task, err error) {
+	if task, err = NewTask(raw.Title, raw.Body, raw.UserEmail); err == nil {
+		err = s.repo.Save(task)
+	}
 	return
 }
 

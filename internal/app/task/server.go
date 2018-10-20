@@ -1,6 +1,8 @@
 package task
 
 import (
+	"encoding/json"
+	"fmt"
 	"net/http"
 )
 
@@ -16,6 +18,22 @@ func NewServer(service Service) Server {
 
 // Create a task.
 func (s Server) Create(w http.ResponseWriter, r *http.Request) {
+	var (
+		task Task
+		err  error
+	)
+
+	if err = json.NewDecoder(r.Body).Decode(&task); err == nil {
+		if task, err = s.service.Create(task); err == nil {
+			fmt.Println("Writing response")
+			w.Header().Set("Content-Type", "application/json")
+			json.NewEncoder(w).Encode(task)
+		} else {
+			w.Write([]byte(fmt.Sprintf("error in creating task, %v", err)))
+		}
+	} else {
+		w.Write([]byte(fmt.Sprintf("invalid: task can't be decoded, %v", err)))
+	}
 
 }
 
