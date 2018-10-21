@@ -34,7 +34,6 @@ func (s Service) Create(ctx context.Context, raw Task) (task Task, err error) {
 
 // Update a task.
 func (s Service) Update(ctx context.Context, updateTask Task) (task Task, err error) {
-
 	if _, ok := s.user.Auth(ctx); ok {
 		if updateTask.ID == "" {
 			err = fmt.Errorf("task id cannot be empty")

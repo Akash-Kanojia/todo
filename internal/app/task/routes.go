@@ -33,5 +33,4 @@ func ServeRoutes(r *mux.Router, server Server) {
 	r.HandleFunc(taskID, func(w http.ResponseWriter, r *http.Request) {
 		server.Delete(w, r)
 	}).Methods("DELETE")
-
 }

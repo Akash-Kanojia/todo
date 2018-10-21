@@ -40,7 +40,6 @@ func NewMuxRouter() *mux.Router {
 
 // HttpServer listen and http request for todo apis.
 func HttpServer(r *mux.Router) (err error) {
-
 	localMode := flag.Bool("local", false, "set to true for running app locally")
 	flag.Parse()
 

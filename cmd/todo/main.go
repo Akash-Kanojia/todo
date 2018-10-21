@@ -9,7 +9,6 @@ import (
 )
 
 func main() {
-
 	app := fx.New(
 		task.Module,
 		user.Module,

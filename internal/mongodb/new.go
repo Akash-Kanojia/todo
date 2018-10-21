@@ -8,7 +8,6 @@ import (
 )
 
 func New() *mgo.Database {
-
 	var (
 		session *mgo.Session
 		db      *mgo.Database
