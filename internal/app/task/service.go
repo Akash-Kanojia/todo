@@ -2,6 +2,7 @@ package task
 
 import (
 	"context"
+	"fmt"
 	"time"
 	"todo/internal/app/user"
 )
@@ -35,6 +36,11 @@ func (s Service) Create(ctx context.Context, raw Task) (task Task, err error) {
 func (s Service) Update(ctx context.Context, updateTask Task) (task Task, err error) {
 
 	if _, ok := s.user.Auth(ctx); ok {
+		if updateTask.ID == "" {
+			err = fmt.Errorf("task id cannot be empty")
+			return
+		}
+
 		if task, err = s.repo.Find(updateTask.ID); err != nil {
 			return
 		}

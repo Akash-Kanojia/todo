@@ -33,23 +33,3 @@ func NewTask(title, body, email string) (task Task, err error) {
 	task.UpdatedAt = time.Now()
 	return
 }
-
-// SetStarred sets the task's starred to true.
-func (task *Task) SetStarred() {
-	task.Starred = true
-}
-
-// UnsetStarred sets the task's starred to false.
-func (task *Task) UnsetStarred() {
-	task.Starred = false
-}
-
-// SetBody sets the body of task.
-func (task *Task) SetBody(body string) {
-	task.Body = body
-}
-
-// SetTitle sets the title of task.
-func (task *Task) SetTitle(title string) {
-	task.Title = title
-}
