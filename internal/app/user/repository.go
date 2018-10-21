@@ -5,7 +5,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-const collectionName = "user"
+const collectionName = "users"
 
 // Repository is an interface between persistence layer and user entity.
 type Repository interface {

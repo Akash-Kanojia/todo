@@ -13,6 +13,11 @@ import (
 	"github.com/gorilla/mux"
 )
 
+const (
+	sslKey  = "/usr/ssl/key"
+	sslCert = "/usr/ssl/cert"
+)
+
 type Server struct {
 	task task.Server
 	user user.Server
@@ -48,6 +53,7 @@ func HttpServer(r *mux.Router) (err error) {
 				handlers.AllowCredentials(),
 			)(r)))
 	} else {
+		// Expose http and https ports.
 		go http.ListenAndServe(
 			":80",
 			context.ClearHandler(http.HandlerFunc(
@@ -59,6 +65,13 @@ func HttpServer(r *mux.Router) (err error) {
 					)
 				}),
 			))
+
+		http.ListenAndServeTLS(":443", sslCert, sslKey, context.ClearHandler(handlers.CORS(
+			// handlers.AllowedOrigins([]string{"http://todo.api.com"}),
+			handlers.AllowedMethods([]string{"DELETE", "GET", "POST", "PUT"}),
+			handlers.AllowedHeaders([]string{"Content-Type", "X-Requested-With", "Origin", "Accept"}),
+			handlers.AllowCredentials(),
+		)(r)))
 	}
 
 	return

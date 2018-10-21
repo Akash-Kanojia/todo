@@ -7,7 +7,7 @@ import (
 	"gopkg.in/mgo.v2/bson"
 )
 
-const collectionName = "task"
+const collectionName = "tasks"
 
 // Repository is an interface between persistence layer and task entity.
 type Repository interface {

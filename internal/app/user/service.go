@@ -3,6 +3,8 @@ package user
 import (
 	"context"
 	"fmt"
+
+	"gopkg.in/mgo.v2"
 )
 
 const key = "user"
@@ -21,14 +23,13 @@ func NewService(repo Repository) Service {
 
 // Create a user.
 func (s Service) Create(usr User) (user User, err error) {
-	user = NewUser(usr.Email, usr.Name)
-	err = s.repo.Save(user)
-	return
-}
+	if _, err = s.repo.Find(usr.Email); err == mgo.ErrNotFound {
+		user = NewUser(usr.Email, usr.Name)
+		err = s.repo.Save(user)
+	} else {
+		err = fmt.Errorf("User already exist")
+	}
 
-// Find a user for given email.
-func (s Service) Find(email string) (user User, err error) {
-	user, err = s.repo.Find(email)
 	return
 }
 

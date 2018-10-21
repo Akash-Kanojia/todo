@@ -15,11 +15,12 @@ func New() *mgo.Database {
 		err     error
 	)
 
+	mongoDBURL := config.GetDef("MONGO_DB_URL", "mongodb://127.0.0.1:27017")
 	if session, err = mgo.Dial(
-		config.GetDef("MONGO_DB_URL", "http://localhost:7070"),
+		mongoDBURL,
 	); err != nil {
 		panic(fmt.Errorf("Error in establishing database connection on %v , error : %+v",
-			config.GetDef("MONGO_DB_URL", "http://localhost:7070"),
+			mongoDBURL,
 			err,
 		))
 	}
